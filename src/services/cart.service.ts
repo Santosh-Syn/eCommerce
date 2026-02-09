@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../models/product.model';
 import { BehaviorSubject } from 'rxjs';
-import { ProductService } from './product.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +9,7 @@ export class CartService {
   cartItems: Product[] = [];
   cartItems$ = new BehaviorSubject<Product[]>([]);
 
-  constructor(private productService: ProductService) {
+  constructor() {
   }
 
   addToCart(product: Product) {
@@ -27,11 +26,16 @@ export class CartService {
 
 
   removeFromCart(id: number) {
+    // reset count in products list    
+    this.cartItems.map(itm => {
+      if (itm.id === id) {
+        itm.count = 0;
+      }
+    }); 
+    
+    // Remove the item from cart 
     this.cartItems = this.cartItems.filter(product=> product.id !== id);
     this.cartItems$.next(this.cartItems);
-
-    // reset the product count
-    this.productService.updateProductCount(id, 0);
   }
 
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../models/product.model';
 import { BehaviorSubject } from 'rxjs';
+import { CartService } from './cart.service';
 
 @Injectable({
   providedIn: 'root',
@@ -45,9 +46,22 @@ export class ProductService {
     }
   ];
 
-
   products$ = new BehaviorSubject<Product[]>(this.products);
 
+  constructor(private cartService: CartService) {
+   
+    // Keep product counts in sync with cart contents.
+    this.cartService.cartItems$.subscribe((cartItems) => {     
+      
+      cartItems.forEach(cartItm => {
+        const idx = this.products.findIndex(product => product.id === cartItm.id);
+        if (idx !== -1) {
+          this.products[idx].count = cartItm.count;
+        }
+      });
+      this.products$.next(this.products);
+    });
+  }
 
   addProduct(product: Product) {
     this.products.push(product);
@@ -58,6 +72,9 @@ export class ProductService {
   deleteProduct(id: number) {
     this.products = this.products.filter(product=> product.id !== id);
     this.products$.next(this.products);
+
+    // also remove the product from cart if it exists
+    this.cartService.removeFromCart(id);
   }
 
 
