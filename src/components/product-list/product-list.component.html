@@ -1,30 +1,30 @@
 
-<div class="grid-grid-cols-1 md:grid-cols-3 gap-4">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 
     @for(product of products; track product.id) {
-    <div 
-        class="border p-4 rounded shadow">
-        <h2 class="font-bold"> {{ product.name }} </h2>
-        <p>INR {{ product.price }} </p>
-        <p class="text-sm text-gray-500"> {{ product.category }} </p>
+    <div class="border p-4 rounded-lg shadow-sm bg-white">
+        <div class="flex flex-col md:flex-row items-start md:items-center gap-4">
+            <div class="w-24 h-24 bg-slate-50 rounded-md overflow-hidden flex-shrink-0 flex items-center justify-center">
+                <img src="{{ product.imageUrl }}" loading="lazy" alt="{{ product.name }}" class="w-full h-full object-cover" />
+            </div>
 
-        @if(authService.isCustomer()) {
-            <button 
-                class="bg-blue-500 text-white px-3 py-1 mt-2 "
-                (click)="addToCart(product)"> Add to Cart 
-            </button>
-            <span class="inline-flex items-center justify-center rounded-full px-2 py-0.5 ml-1
-                                text-xs font-semibold bg-red-100 text-red-700"> 
-                                {{ product.count }} 
-            </span>
-        }
+            <div class="flex-1 min-w-0">
+                <h2 class="text-lg font-semibold text-slate-900 truncate">{{ product.name }}</h2>
+                <p class="text-sm text-slate-700 mt-1">INR {{ product.price }}</p>
+                <p class="text-sm text-slate-500 mt-1">{{ product.category }}</p>
+            </div>
 
-        @if(authService.isAdmin()){
-            <button 
-                class="bg-red-100 text-red-700 px-2 py-0.5 mt-2 ml-2 rounded text-sm border border-red-200 hover:bg-red-200"
-                (click)="deleteProduct(product.id)"> Delete
-            </button>
-        }
+            <div class="flex flex-col items-end gap-2">
+                @if(authService.isCustomer()) {
+                    <button class="bg-blue-600 text-white px-3 py-1 rounded-md text-sm hover:bg-blue-700 transition" (click)="addToCart(product)">Add to Cart</button>
+                    <span class="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-xs font-semibold bg-red-100 text-red-700">{{ product.count }}</span>
+                }
+
+                @if(authService.isAdmin()){
+                    <button class="bg-red-100 text-red-700 px-2 py-0.5 rounded text-sm border border-red-200 hover:bg-red-200 transition" (click)="deleteProduct(product.id)">Delete</button>
+                }
+            </div>
+        </div>
     </div>
 }
 </div>

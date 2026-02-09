@@ -14,35 +14,48 @@ export class ProductService {
       name: 'Mango',
       price: 1500,
       category: 'Food',
-      count: 0
+      count: 0,
+      imageUrl: '/images/mango.jpg'
     },
     {
       id: 2,
       name: 'iPhone',
       price: 80000,
       category: 'Electronics',
-      count: 0
+      count: 0,
+      imageUrl: '/images/iphone.jpg'
     },
     {
       id: 3,
       name: 'Notebook',
       price: 50000,
       category: 'Electronics',
-      count: 0
+      count: 0,
+      imageUrl: '/images/laptop.jpg'
     },
     {
       id: 4,
-      name: 'Sandals',
+      name: 'Glasses',
       price: 2000,
       category: 'Fashion',
-      count: 0
+      count: 0,
+      imageUrl: '/images/glasses.jpg'
     },
     {
       id: 5,
       name: 'Table',
       price: 1000,
       category: 'Furniture',
-      count: 0
+      count: 0,
+      imageUrl: '/images/table.jpg'
+    },
+    {
+      id: 5,
+      name: 'Chair',
+      price: 1100,
+      category: 'Furniture',
+      count: 0,
+      imageUrl: '/images/chair.jpg'
     }
   ];
 
