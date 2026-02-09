@@ -10,7 +10,8 @@ import { Product } from '../../models/product.model';
 })
 export class Cart implements OnInit{
   cartItems: Product[]=[];
-
+  openCart = true;
+  
   // todo: calculate total from cart items instead of hardcoding
   cartTotal = 100;
   
