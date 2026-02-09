@@ -38,17 +38,22 @@
             <option value="admin"> Admin </option>
         </select>
 
-        <button type="cancel" (click)="onCancelClick()"
-            class="bg-green-600 text-white px-4 py-2 w-[20%] mr-[5px] cursor-pointer
-                                disabled:bg-slate-300 disabled:text-slate-500 disabled:cursor-not-allowed disabled:hower:bg-slate-300">
-            Cancel
-        </button>
-        
-        <button type="submit" [disabled]="!userForm.valid"
-            class="bg-green-600 text-white px-4 py-2 w-[70%] cursor-pointer
-                                disabled:bg-slate-300 disabled:text-slate-500 disabled:cursor-not-allowed disabled:hower:bg-slate-300">
-            Register
-        </button>
+
+        <div class="flex gap-2 w-full">
+            <button type="button" (click)="onCancelClick()"
+                class="bg-slate-500 text-white px-4 py-2 w-[20%] border rounded cursor-pointer
+                                    disabled:bg-slate-300 disabled:text-slate-500 disabled:cursor-not-allowed disabled:hower:bg-slate-300">
+                Cancel
+            </button>
+            
+            <button type="submit" [disabled]="!userForm.valid"
+                class=" flex-1 bg-green-600 text-white rounded px-4 py-2 cursor-pointer
+                                    disabled:bg-slate-300 disabled:text-slate-500 disabled:cursor-not-allowed disabled:hower:bg-slate-300">
+                Register
+            </button>
+        </div>
+
+
 
     </div>
 </form>
