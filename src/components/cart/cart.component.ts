@@ -10,6 +10,9 @@ import { Product } from '../../models/product.model';
 })
 export class Cart implements OnInit{
   cartItems: Product[]=[];
+
+  // todo: calculate total from cart items instead of hardcoding
+  cartTotal = 100;
   
   constructor(private cartService: CartService) {
   }
@@ -27,7 +30,7 @@ export class Cart implements OnInit{
     });
   }
 
-  
+
   onRemoveItemClick(id: number) {
     this.cartService.removeFromCart(id);
   }
