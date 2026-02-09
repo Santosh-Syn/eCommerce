@@ -1,0 +1,55 @@
+
+<!--
+<div class="max-w-sm max-auto mt-10">
+    <input #name type="text" placeholder="Name" class="border p-2 w-full mb-2 test">
+
+    <input #email type="text" placeholder="Email" class="border p-2 w-full mb-2">
+
+    <select #role class="border p-2 w-full mb-2">
+        <option value="customer"> Customer </option>
+        <option value="seller"> Seller </option>
+        <option value="admin"> Admin </option>
+    </select>
+
+    <button class="bg-green-600 text-white px-4 py-2 w-full"
+        (click)="register(name.value, email.value, role.value)">
+            Register
+    </button>
+</div>
+-->
+
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="max-w-sm max-auto my-10">
+        <div><span class="block mb-4 text-sm text-slate-600 italic">Fields marked with <span class="text-red-600 font-semibold">*</span> are required</span></div>
+        <label for="name"> *Name: </label>
+        <input id="name" type="text" formControlName="name" placeholder="Name" class="border p-2 w-full mb-2" />
+
+        <label for="email">*Email: </label>
+        <input id="email" type="email" formControlName="email" placeholder="Email" class="border p-2 w-full mb-2" />
+        <div *ngIf="userForm.controls.email.invalid && userForm.controls.email.touched" class="mt-[-6px] mb-[10px]">
+            <span *ngIf="userForm.controls.email.errors?.['email']" class="text-red-600">
+                Enter a valid email address </span>
+        </div>
+
+        <label for="role"> *Role: </label>
+        <select id="role" formControlName="role" class="border p-2 w-full mb-2">
+            <option value="customer"> Customer </option>
+            <option value="seller"> Seller </option>
+            <option value="admin"> Admin </option>
+        </select>
+
+        <button type="cancel" (click)="onCancelClick()"
+            class="bg-green-600 text-white px-4 py-2 w-[20%] mr-[5px] cursor-pointer
+                                disabled:bg-slate-300 disabled:text-slate-500 disabled:cursor-not-allowed disabled:hower:bg-slate-300">
+            Cancel
+        </button>
+        
+        <button type="submit" [disabled]="!userForm.valid"
+            class="bg-green-600 text-white px-4 py-2 w-[70%] cursor-pointer
+                                disabled:bg-slate-300 disabled:text-slate-500 disabled:cursor-not-allowed disabled:hower:bg-slate-300">
+            Register
+        </button>
+
+    </div>
+</form>
+

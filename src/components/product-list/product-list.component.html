@@ -1,0 +1,26 @@
+
+<div class="grid-grid-cols-1 md:grid-cols-3 gap-4">
+
+    @for(product of products; track product.id) {
+    <div 
+        class="border p-4 rounded shadow">
+        <h2 class="font-bold"> {{ product.name }} </h2>
+        <p>INR {{ product.price }} </p>
+        <p class="text-sm text-gray-500"> {{ product.category }} </p>
+
+        @if(authService.isCustomer()) {
+            <button 
+                class="bg-blue-500 text-white px-3 py-1 mt-2 "
+                (click)="addToCart(product)"> Add to Cart 
+            </button>
+        }
+
+        @if(authService.isAdmin()){
+            <button 
+                class="bg-red-500 text-white px-3 py-1 mt-2 ml-2"
+                (click)="deleteProduct(product.id)"> Delete
+            </button>
+        }
+    </div>
+}
+</div>
