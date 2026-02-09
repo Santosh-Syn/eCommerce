@@ -13,6 +13,10 @@
                 class="bg-blue-500 text-white px-3 py-1 mt-2 "
                 (click)="addToCart(product)"> Add to Cart 
             </button>
+            <span class="inline-flex items-center justify-center rounded-full px-2 py-0.5
+                                text-xs font-semibold bg-red-100 text-red-700"> 
+                                {{ product.count }} 
+            </span>
         }
 
         @if(authService.isAdmin()){

@@ -1,26 +1,26 @@
 import { Injectable } from '@angular/core';
-import { CartItem, Product } from '../models/product.model';
+import { Product } from '../models/product.model';
 import { BehaviorSubject } from 'rxjs';
+import { ProductService } from './product.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  cartItems: CartItem[] = [];
+  cartItems: Product[] = [];
+  cartItems$ = new BehaviorSubject<Product[]>([]);
 
-  cartItems$ = new BehaviorSubject<CartItem[]>([]);
+  constructor(private productService: ProductService) {
+  }
 
   addToCart(product: Product) {
     let ind = this.cartItems.findIndex(itm=> itm.id === product.id);
-    let currCount = 0;
 
-    if(ind !== -1) {
-      currCount = this.cartItems[ind].count;
-      this.cartItems.splice(ind,1, {...product, count: ++currCount });
+    if (ind !== -1) {
+      this.cartItems[ind] = product;
     } else {
-      this.cartItems.push({...product, count: ++currCount });
+      this.cartItems.push(product);
     }
-
     
     this.cartItems$.next(this.cartItems);
   }
@@ -29,6 +29,9 @@ export class CartService {
   removeFromCart(id: number) {
     this.cartItems = this.cartItems.filter(product=> product.id !== id);
     this.cartItems$.next(this.cartItems);
+
+    // reset the product count
+    this.productService.updateProductCount(id, 0);
   }
 
 
